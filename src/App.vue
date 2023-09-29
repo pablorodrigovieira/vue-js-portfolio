@@ -1,31 +1,39 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { defineComponent } from "vue";
+import PacmanLoader from "@/components/PacmanLoader.vue";
+export default defineComponent({
+  components: { PacmanLoader }
+});
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <HelloWorld />
-    </div>
-  </header>
+  <img src="./assets/logo.svg" alt="PV Logo" class="logo" />
+
+  <div class="wrapper">
+    <h2>Coming soon!</h2>
+    <PacmanLoader />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style scoped lang="scss">
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100%;
+
+  h2 {
+    color: var(--color-text);
+    margin-bottom: 50px;
+  }
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.logo {
+  width: 30vw;
+  max-width: 150px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 </style>
