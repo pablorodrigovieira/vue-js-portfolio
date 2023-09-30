@@ -1,12 +1,12 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="pacman">
-    <div />
-    <div />
-    <div />
-    <div />
-    <div />
+  <div class="pacman-wrapper">
+    <div class="pacman">
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
+    </div>
   </div>
 </template>
 
@@ -14,9 +14,20 @@
 $primaryClr: var(--color-yellow);
 $ballSize: 10px;
 $pacmanSize: $ballSize * 2.5;
+
+.pacman-wrapper {
+  background: rgba(0, 0, 0, 0.85);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .pacman {
   position: relative;
-
   > div:nth-child(1),
   > div:nth-child(2) {
     width: 0;

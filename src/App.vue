@@ -1,39 +1,46 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import PacmanLoader from "@/components/PacmanLoader.vue";
-export default defineComponent({
-  components: { PacmanLoader }
-});
-</script>
-
 <template>
-  <img src="./assets/logo.svg" alt="PV Logo" class="logo" />
-
   <div class="wrapper">
-    <h2>Coming soon!</h2>
-    <PacmanLoader />
+    <Sidebar />
+    <div class="content">
+      <Modal />
+    </div>
+    <PacmanLoader v-if="getIsLoading" />
   </div>
 </template>
+
+<script setup lang="ts">
+import PacmanLoader from "@/components/PacmanLoader.vue";
+import Sidebar from "@/components/Sidebar.vue";
+import Modal from "@/components/Modal.vue";
+import { useLayoutStore } from "@/stores/layout";
+import { storeToRefs } from "pinia";
+
+const store = useLayoutStore();
+const { getIsLoading } = storeToRefs(store);
+</script>
 
 <style scoped lang="scss">
 .wrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 100%;
+  width: 100%;
 
   h2 {
-    color: var(--color-text);
+    color: black;
     margin-bottom: 50px;
   }
-}
 
-.logo {
-  width: 30vw;
-  max-width: 150px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  .content {
+    flex: 1 1 0;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      padding-left: 1rem;
+    }
+  }
 }
 </style>
