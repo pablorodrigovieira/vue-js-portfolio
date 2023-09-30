@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useLayoutStore = defineStore("layout", () => {
-  const isExpanded = ref(true);
+  const isExpanded = ref(window.innerWidth > 1024);
   const isLoading = ref(false);
   const currentView = ref("Home");
 
@@ -13,9 +13,10 @@ export const useLayoutStore = defineStore("layout", () => {
     if (viewName === currentView.value) return;
 
     isLoading.value = true;
+    currentView.value = viewName;
+
     setTimeout(() => {
       isLoading.value = false;
-      currentView.value = viewName;
     }, 1500);
   }
 

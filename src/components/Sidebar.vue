@@ -4,7 +4,7 @@
       <img src="../assets/logo.svg" alt="PV Logo" width="56" height="56" />
     </div>
 
-    <div class="menu-toggle-wrap">
+    <div class="menu-toggle-wrap" v-if="isWidescreen">
       <span class="menu-toggle icon" @click="setIsExpanded">
         <component :is="IconAnglesRight" />
       </span>
@@ -65,6 +65,7 @@ import IconFilePdf from "@/components/icons/IconFilePdf.vue";
 import IconEnvelope from "@/components/icons/IconEnvelope.vue";
 import IconLinkedIn from "@/components/icons/IconLinkedIn.vue";
 import IconGitHub from "@/components/icons/IconGitHub.vue";
+import {computed} from "vue";
 
 const arrayOfButtons = [
   {
@@ -108,6 +109,9 @@ const arrayOfLinks = [
 const store = useLayoutStore();
 const { setIsExpanded, setCurrenView } = store;
 const { getIsExpanded, getCurrentView } = storeToRefs(store);
+
+const isWidescreen = computed(() => window.innerWidth > 1024);
+
 </script>
 
 <style scoped lang="scss">
@@ -134,9 +138,11 @@ aside {
       opacity: 1;
     }
   }
-  //@media (max-width: 768px) {
-  //  position: fixed;
-  //}
+  @media (max-width: 767px) {
+    //position: fixed;
+    //&.is-expanded {
+    //}
+  }
 }
 
 .logo {

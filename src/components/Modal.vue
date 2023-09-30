@@ -72,6 +72,9 @@ const setClassName = (className: string) => {
   transform: translateY(-50%) translateX(-50%) scale(0);
   opacity: 0;
   transition: all 0.25s;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 75vw;
+  }
   &.active {
     transform: translateY(-50%) translateX(calc(-50% + 150px)) scale(1);
     opacity: 1;
@@ -79,6 +82,9 @@ const setClassName = (className: string) => {
   &.active-wide {
     transform: translateY(-50%) translateX(-50%) scale(1);
     opacity: 1;
+    @media (min-width: 768px) and (max-width: 1200px) {
+      transform: translateY(-50%) translateX(-44%) scale(1);
+    }
   }
   &.minimize {
     top: 125%;

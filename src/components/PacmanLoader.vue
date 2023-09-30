@@ -16,7 +16,7 @@ $ballSize: 10px;
 $pacmanSize: $ballSize * 2.5;
 
 .pacman-wrapper {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.95);
   width: 100vw;
   height: 100vh;
   position: absolute;
