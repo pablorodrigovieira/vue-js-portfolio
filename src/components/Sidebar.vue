@@ -2,6 +2,11 @@
   <aside :class="`${getIsExpanded ? 'is-expanded' : ''}`">
     <div class="logo">
       <img src="../assets/logo.svg" alt="PV Logo" width="56" height="56" />
+      <div class="menu-toggle-wrap" v-if="isMobileScreen">
+        <span class="menu-toggle menu-button icon" @click="handleMenu">
+          <MenuButton :is-active="isMenuOpen" :handle-menu="handleMenu" />
+        </span>
+      </div>
     </div>
 
     <div class="menu-toggle-wrap" v-if="isWidescreen">
@@ -10,7 +15,7 @@
       </span>
     </div>
 
-    <div class="menus">
+    <div v-if="isWidescreen ? true : isMenuOpen" class="menus">
       <div class="menu">
         <hr />
         <div
@@ -56,6 +61,8 @@
 <script setup lang="ts">
 import { useLayoutStore } from "@/stores/layout";
 import { storeToRefs } from "pinia";
+import { computed, ref } from "vue";
+import MenuButton from "@/components/MenuButton.vue";
 import IconHome from "@/components/icons/IconHome.vue";
 import IconAnglesRight from "@/components/icons/IconAnglesRight.vue";
 import IconAddressCard from "@/components/icons/IconAddressCard.vue";
@@ -65,7 +72,6 @@ import IconFilePdf from "@/components/icons/IconFilePdf.vue";
 import IconEnvelope from "@/components/icons/IconEnvelope.vue";
 import IconLinkedIn from "@/components/icons/IconLinkedIn.vue";
 import IconGitHub from "@/components/icons/IconGitHub.vue";
-import {computed} from "vue";
 
 const arrayOfButtons = [
   {
@@ -111,7 +117,12 @@ const { setIsExpanded, setCurrenView } = store;
 const { getIsExpanded, getCurrentView } = storeToRefs(store);
 
 const isWidescreen = computed(() => window.innerWidth > 1024);
+const isMobileScreen = computed(() => window.innerWidth < 768);
+const isMenuOpen = ref(false);
 
+function handleMenu() {
+  isMenuOpen.value = !isMenuOpen.value;
+}
 </script>
 
 <style scoped lang="scss">
@@ -125,7 +136,7 @@ aside {
   &.is-expanded {
     width: 300px;
     .menu-toggle-wrap {
-      top: -3rem;
+      top: -3.3rem;
       justify-content: flex-end;
       padding-right: 0.7rem;
       padding-left: 0.7rem;
@@ -137,11 +148,15 @@ aside {
     .button .text {
       opacity: 1;
     }
+
+    @media (max-width: 767px) {
+      position: fixed;
+      width: 100%;
+    }
   }
   @media (max-width: 767px) {
-    //position: fixed;
-    //&.is-expanded {
-    //}
+    position: fixed;
+    width: 100%;
   }
 }
 
@@ -274,6 +289,10 @@ svg {
     &:first-child {
       margin-top: 0.7rem;
     }
+  }
+
+  .menu-button {
+    transition: opacity 0.5s ease-in-out;
   }
 }
 </style>

@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 export const useLayoutStore = defineStore("layout", () => {
-  const isExpanded = ref(window.innerWidth > 1024);
+  const isExpanded = ref(window.innerWidth < 768);
   const isLoading = ref(false);
   const currentView = ref("Home");
 

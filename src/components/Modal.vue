@@ -153,6 +153,7 @@ const setClassName = (className: string) => {
       font-size: 13px;
       color: rgb(34, 32, 34);
       width: 100%;
+      padding-right: 30px;
     }
   }
   .window {
