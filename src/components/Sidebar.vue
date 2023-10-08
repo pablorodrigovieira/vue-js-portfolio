@@ -171,12 +171,13 @@ aside {
 
 .menu-toggle-wrap {
   display: flex;
+  margin-top: 0.3rem;
+  margin-right: 0.7rem;
   margin-bottom: 1rem;
   position: relative;
   top: 0;
   transition: 0.2s ease-out;
   justify-content: center;
-  margin-right: 0.7rem;
   padding-left: 0.7rem;
 
   .menu-toggle {
@@ -188,13 +189,11 @@ aside {
     .icon {
       font-size: 1.5rem;
       color: white;
-      transition: 0.2s ease-out;
+      transition: color 0.2s ease-out;
     }
     &:hover {
       .icon {
         color: var(--color-yellow);
-        transition: 0.2s ease-in-out;
-        transform: translateX(0.3rem);
       }
     }
   }
@@ -202,12 +201,13 @@ aside {
 
 .button .text {
   opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 
 svg {
   fill: white;
   width: 1.5rem;
+  transition: fill 0.2s;
   &:hover {
     fill: var(--color-yellow);
   }
@@ -218,6 +218,7 @@ svg {
   flex-direction: column;
   justify-content: space-between;
   height: 90%;
+  animation: fade-in 0.5s forwards;
 }
 
 .menu {
@@ -251,8 +252,8 @@ svg {
 
     .item {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 1.5rem;
       width: 100%;
       text-decoration: none;
       :nth-child(2) {
@@ -295,4 +296,14 @@ svg {
     transition: opacity 0.5s ease-in-out;
   }
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 </style>

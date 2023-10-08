@@ -2,7 +2,7 @@
   <div class="wrapper">
     <Sidebar />
     <div class="content">
-      <Modal />
+<!--      <Modal />-->
     </div>
     <PacmanLoader v-if="getIsLoading" />
   </div>

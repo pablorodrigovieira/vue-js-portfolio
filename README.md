@@ -2,6 +2,16 @@
 
 Portfolio built using Vue JS and SCSS.
 
+## To-Do List
+
+- [x] Add animation to menu items
+- [ ] Make the site to use router for each page
+- [ ] Create a Util SCSS with functions for media queries and font size - use REM
+- [ ] Create a function to convert pixel to REM and EM
+- [ ] Use EM on the media queries, so the site can adapt when the user changes the font
+- [ ] Cleanup and organise scss
+- [ ] Look into accessibility and navigation using keyboard
+
 ## Type Support for `.vue` Imports in TS
 
 TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
