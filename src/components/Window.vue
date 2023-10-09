@@ -31,11 +31,10 @@ const { getCurrentView } = storeToRefs(store);
   display: flex;
   flex-grow: 1;
   margin-top: 85px;
-  @media (min-width: 50em) {
+  color: #000;
+
+  @media (min-width: 1024px) {
     margin-top: 0;
-  }
-  .content {
-    width: 100%;
   }
   .mac-window {
     display: flex;
@@ -43,12 +42,15 @@ const { getCurrentView } = storeToRefs(store);
     flex-grow: 1;
     border-radius: 5px;
     box-shadow: 0 15px 20px rgba(black, 0.7);
-
+    max-width: 1920px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
     .title-bar {
       background: rgb(208, 207, 208);
       background: linear-gradient(to top, rgb(200, 197, 200), rgb(234, 231, 234));
       border-bottom: 1px solid rgb(180, 180, 180);
-      height: 35px;
+      min-height: 35px;
       width: 100%;
       display: flex;
       align-items: center;
@@ -84,17 +86,18 @@ const { getCurrentView } = storeToRefs(store);
       }
       .title {
         text-align: center;
-        line-height: 21px;
-        font-size: 13px;
+        font-size: 0.9em;
         color: rgb(34, 32, 34);
         width: 100%;
         padding-right: 30px;
+        font-weight: bold;
       }
     }
     .window {
       background: white;
       overflow-y: scroll;
-      height: 100%;
+      min-height: 100%;
+      padding: 1em;
     }
   }
 }

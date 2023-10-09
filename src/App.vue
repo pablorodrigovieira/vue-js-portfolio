@@ -2,22 +2,27 @@
   <div class="wrapper">
     <Sidebar />
     <main class="content">
-      <Window> CONTENT HERE </Window>
+      <Window>
+        <Home />
+        <AboutMe />
+        <Experience />
+        <Education />
+        <Resume />
+        <Contact />
+      </Window>
     </main>
-    <!--    <PacmanLoader v-if="getIsLoading" />-->
   </div>
 </template>
 
 <script setup lang="ts">
-// import PacmanLoader from "@/components/PacmanLoader.vue";
 import Sidebar from "@/components/Sidebar.vue";
-// import Modal from "@/components/Modal.vue";
-import { useLayoutStore } from "@/stores/layout";
-// import { storeToRefs } from "pinia";
 import Window from "@/components/Window.vue";
-
-const store = useLayoutStore();
-// const { getIsLoading } = storeToRefs(store);
+import Home from "@/components/Home.vue";
+import AboutMe from "@/components/AboutMe.vue";
+import Experience from "@/components/Experience.vue";
+import Education from "@/components/Education.vue";
+import Resume from "@/components/Resume.vue";
+import Contact from "@/components/Contact.vue";
 </script>
 
 <style scoped lang="scss">

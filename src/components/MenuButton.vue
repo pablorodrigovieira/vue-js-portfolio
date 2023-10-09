@@ -37,7 +37,7 @@ defineProps({
 }
 
 .bar.active:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
+  transform: translateY(11px) rotate(45deg);
 }
 
 .bar.active:nth-child(2) {

@@ -1,8 +1,8 @@
 <template>
   <aside :class="`${getIsExpanded ? 'is-expanded' : ''}`">
-    <div class="logo">
+    <div class="logo header-mobile">
       <img src="../assets/logo.svg" alt="PV Logo" width="56" height="56" />
-      <div class="menu-toggle-wrap" v-if="isMobileScreen">
+      <div class="menu-mobile">
         <span class="menu-toggle menu-button icon" @click="handleMenu">
           <MenuButton :is-active="isMenuOpen" :handle-menu="handleMenu" />
         </span>
@@ -15,7 +15,7 @@
       </span>
     </div>
 
-    <div v-if="isWidescreen ? true : isMenuOpen" class="menus">
+    <div class="menus" :class="isMobileScreen && !isMenuOpen ? 'menu-closed' : ''">
       <div class="menu">
         <hr />
         <div
@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { useLayoutStore } from "@/stores/layout";
 import { storeToRefs } from "pinia";
-import { computed, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import MenuButton from "@/components/MenuButton.vue";
 import IconHome from "@/components/icons/IconHome.vue";
 import IconAnglesRight from "@/components/icons/IconAnglesRight.vue";
@@ -116,9 +116,24 @@ const store = useLayoutStore();
 const { setIsExpanded, setCurrenView } = store;
 const { getIsExpanded, getCurrentView } = storeToRefs(store);
 
-const isWidescreen = computed(() => window.innerWidth > 1024);
-const isMobileScreen = computed(() => window.innerWidth < 768);
 const isMenuOpen = ref(false);
+const isWidescreen = ref(window.innerWidth > 1024);
+const isMobileScreen = ref(window.innerWidth < 1023);
+
+const handleResize = () => {
+  isWidescreen.value = window.innerWidth > 1024;
+  isMobileScreen.value = window.innerWidth < 1023;
+
+  isMenuOpen.value = window.innerWidth >= 1023;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+});
 
 function handleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
@@ -137,6 +152,7 @@ aside {
   background: var(--vt-c-black);
   display: flex;
   flex-direction: column;
+  min-width: 80px;
   width: calc(3rem + 32px);
   overflow: hidden;
   transition: 0.2s ease-out;
@@ -145,18 +161,17 @@ aside {
     width: 300px;
     min-width: 100%;
 
-    @media (min-width: 50em) {
+    @media (min-width: 1024px) {
       width: 300px;
       min-width: 300px;
-    }
-
-    .menu-toggle-wrap {
-      top: -3.3rem;
-      justify-content: flex-end;
-      padding-right: 0.7rem;
-      padding-left: 0.7rem;
-      .menu-toggle {
-        transform: rotate(-180deg);
+      .menu-toggle-wrap {
+        top: -4rem;
+        justify-content: flex-end;
+        padding-right: 0.7rem;
+        padding-left: 0.7rem;
+        .menu-toggle {
+          transform: rotate(-180deg);
+        }
       }
     }
 
@@ -164,14 +179,29 @@ aside {
       opacity: 1;
     }
 
-    @media (max-width: 50em) {
+    @media (max-width: 1023px) {
       position: fixed;
       width: 100%;
     }
   }
-  @media (max-width: 50em) {
+  .menu-mobile {
+    opacity: 0;
+  }
+  @media (max-width: 1023px) {
     position: fixed;
     width: 100%;
+    .menu-mobile {
+      opacity: 1;
+      justify-content: flex-end;
+      padding-right: 0.7rem;
+      padding-left: 0.7rem;
+    }
+    .menu-toggle-wrap {
+      display: none;
+    }
+    .button .text {
+      opacity: 1;
+    }
   }
 }
 
@@ -183,9 +213,16 @@ aside {
     width: 3.5rem;
   }
 
-  @media (max-width: 50em) {
+  @media (max-width: 1023px) {
     max-height: clamp(75px, 80px, 90px);
   }
+}
+
+.header-mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.7rem;
 }
 
 .menu-toggle-wrap {
@@ -239,6 +276,9 @@ svg {
   height: 90%;
   animation: fade-in 0.5s forwards;
 }
+.menu-closed {
+  display: none;
+}
 
 .menu {
   margin: 0;
@@ -254,7 +294,6 @@ svg {
     text-decoration: none;
     transition: 0.2s ease-in-out;
     cursor: pointer;
-    margin-bottom: 0.1rem;
     padding: 0.5rem 0.7rem 0.5rem 1.4rem;
     border-right: 5px solid transparent;
     .icon {
