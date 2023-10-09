@@ -23,7 +23,7 @@
           v-for="btn in arrayOfButtons"
           :key="btn.name"
           :class="getCurrentView === btn.name ? 'active' : ''"
-          @click="setCurrenView(btn.name)"
+          @click="handleCurrentView(btn.name)"
         >
           <div class="item">
             <span class="icon" :class="getCurrentView === 'home' ? 'active' : ''">
@@ -123,10 +123,18 @@ const isMenuOpen = ref(false);
 function handleMenu() {
   isMenuOpen.value = !isMenuOpen.value;
 }
+
+function handleCurrentView(btnName: string) {
+  if (isMobileScreen) {
+    handleMenu();
+  }
+  setCurrenView(btnName);
+}
 </script>
 
 <style scoped lang="scss">
 aside {
+  background: var(--vt-c-black);
   display: flex;
   flex-direction: column;
   width: calc(3rem + 32px);
@@ -135,6 +143,13 @@ aside {
 
   &.is-expanded {
     width: 300px;
+    min-width: 100%;
+
+    @media (min-width: 50em) {
+      width: 300px;
+      min-width: 300px;
+    }
+
     .menu-toggle-wrap {
       top: -3.3rem;
       justify-content: flex-end;
@@ -149,12 +164,12 @@ aside {
       opacity: 1;
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 50em) {
       position: fixed;
       width: 100%;
     }
   }
-  @media (max-width: 767px) {
+  @media (max-width: 50em) {
     position: fixed;
     width: 100%;
   }
@@ -166,6 +181,10 @@ aside {
 
   img {
     width: 3.5rem;
+  }
+
+  @media (max-width: 50em) {
+    max-height: clamp(75px, 80px, 90px);
   }
 }
 
@@ -305,5 +324,4 @@ svg {
     opacity: 1;
   }
 }
-
 </style>

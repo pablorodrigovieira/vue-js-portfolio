@@ -1,46 +1,41 @@
 <template>
   <div class="wrapper">
     <Sidebar />
-    <div class="content">
-<!--      <Modal />-->
-    </div>
-    <PacmanLoader v-if="getIsLoading" />
+    <main class="content">
+      <Window> CONTENT HERE </Window>
+    </main>
+    <!--    <PacmanLoader v-if="getIsLoading" />-->
   </div>
 </template>
 
 <script setup lang="ts">
-import PacmanLoader from "@/components/PacmanLoader.vue";
+// import PacmanLoader from "@/components/PacmanLoader.vue";
 import Sidebar from "@/components/Sidebar.vue";
-import Modal from "@/components/Modal.vue";
+// import Modal from "@/components/Modal.vue";
 import { useLayoutStore } from "@/stores/layout";
-import { storeToRefs } from "pinia";
+// import { storeToRefs } from "pinia";
+import Window from "@/components/Window.vue";
 
 const store = useLayoutStore();
-const { getIsLoading } = storeToRefs(store);
+// const { getIsLoading } = storeToRefs(store);
 </script>
 
 <style scoped lang="scss">
 .wrapper {
+  min-width: 100%;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  flex-direction: row;
-  min-height: 100%;
-  width: 100%;
+  flex-direction: column;
 
-  h2 {
-    color: black;
-    margin-bottom: 50px;
+  @media (min-width: 50em) {
+    flex-direction: row;
   }
 
   .content {
-    flex: 1 1 0;
     background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    overflow: hidden;
-
-    @media (max-width: 768px) {
-      padding-left: 1rem;
-    }
+    padding: 1rem;
+    display: flex;
+    flex-grow: 1;
   }
 }
 </style>

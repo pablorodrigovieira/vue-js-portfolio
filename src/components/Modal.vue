@@ -61,9 +61,9 @@ const setClassName = (className: string) => {
 .mac-window {
   border-radius: 5px;
   overflow: hidden;
+  width: 75vw;
   height: 100%;
   max-height: 80%;
-  width: 85vw;
   max-width: 75vw;
   box-shadow: 0 15px 20px rgba(black, 0.7);
   position: absolute;
@@ -72,18 +72,18 @@ const setClassName = (className: string) => {
   transform: translateY(-50%) translateX(-50%) scale(0);
   opacity: 0;
   transition: all 0.25s;
-  @media (min-width: 768px) and (max-width: 1024px) {
-    width: 75vw;
+  @media (min-width: 50em) {
+    width: 85vw;
   }
   &.active {
     transform: translateY(-50%) translateX(calc(-50% + 150px)) scale(1);
     opacity: 1;
   }
   &.active-wide {
-    transform: translateY(-50%) translateX(-50%) scale(1);
+    transform: translateY(-50%) translateX(-44%) scale(1);
     opacity: 1;
-    @media (min-width: 768px) and (max-width: 1200px) {
-      transform: translateY(-50%) translateX(-44%) scale(1);
+    @media (min-width: 50em) {
+      transform: translateY(-50%) translateX(-50%) scale(1);
     }
   }
   &.minimize {
