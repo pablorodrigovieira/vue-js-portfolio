@@ -18,8 +18,13 @@
 </template>
 
 <style scoped lang="scss">
+@import "@/assets/scss/mixin";
+
+section{
+  @include default-content;
+}
+
 .about {
-  margin-top: 2em;
   h2 {
     margin: 1em 0;
   }

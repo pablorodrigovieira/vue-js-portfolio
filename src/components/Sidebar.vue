@@ -156,6 +156,7 @@ aside {
   width: calc(3rem + 32px);
   overflow: hidden;
   transition: 0.2s ease-out;
+  font-size: 1.25em;
 
   &.is-expanded {
     width: 300px;
@@ -294,7 +295,7 @@ svg {
     text-decoration: none;
     transition: 0.2s ease-in-out;
     cursor: pointer;
-    padding: 0.5rem 0.7rem 0.5rem 1.4rem;
+    padding: 0.9rem 0.7rem 0.9rem 1.4rem;
     border-right: 5px solid transparent;
     .icon {
       font-size: 1.5rem;
